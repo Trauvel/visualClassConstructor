@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Визуальный редактор связей</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/lib/jsplubm.css">
+</head>
+
+<body>
+    <header id="header">
+        <div class="toolbar">
+            <div class="buttonGroup">
+                <button class="button" id="addServiceButton">Добавить сервис</button>
+                <button class="button" id="addClassButton">Добавить класс</button>
+            </div>
+            <h2 class="header">
+                <span class="backArrow" id="backArrow">←</span>
+                <span class="headerText">Верхний слой</span>
+            </h2>
+            <div class="buttonGroup">
+                <button class="button" id="saveButton">Сохранить связи</button>
+                <button class="button" id="loadButton">Загрузить связи</button>
+            </div>
+        </div>
+        <input type="hidden" name="serviceId" id="serviceId">
+    </header>
+
+    <div id="editor">
+    </div>
+    <ul id="contextMenu"
+        style="display: none; position: absolute; list-style: none; background: #fff; border: 1px solid #ccc; padding: 10px;">
+        <li id="renameOption">Переименовать</li>
+        <li id="addConnection">Добавить связь</li>
+    </ul>
+
+    <footer id="footer">
+        <script src="./js/lib/jsplumb.js"></script>
+
+
+        <script src="./js/trauvel.js"></script>
+    </footer>
+</body>
+
+</html>
