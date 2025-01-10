@@ -31,7 +31,7 @@ const addConnection = (block, sourceBlock, isHas) => {
     if (block !== sourceBlock && isAddingConnection) {
         // Создаем связь
         if (!isHas) {
-            console.log('addConnect');
+            // console.log('addConnect');
             jsPlumbInstance.connect({
                 source: sourceBlock.id,
                 target: block.id,

@@ -1,6 +1,6 @@
 document.getElementById('backArrow').addEventListener('click', () => {
-    jsPlumbInstance.reset();
-    jsPlumbInstance.deleteEveryConnection();
+    clearCanvas();
+
     document.getElementById('loadButton').click();
 
     header.querySelector('.backArrow').classList.remove('active');

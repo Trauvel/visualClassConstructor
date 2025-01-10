@@ -1,7 +1,3 @@
-/*
-    Дополнительные обработчики
-*/
-
 // Обработчик для зума с колесика мыши
 let zoomLevel = 1; // Текущий уровень зума
 trauvel.editor.addEventListener('wheel', (e) => {
@@ -24,6 +20,66 @@ trauvel.editor.addEventListener('wheel', (e) => {
 });
 
 function clearCanvas() {
+    jsPlumbInstance.reset();
+    jsPlumbInstance.deleteEveryConnection();
     trauvel.editor.innerHTML = '';
     trauvel.blocks = [];
+}
+
+function saveCanvas(isJson = true) {
+    // console.log('trauvel.blocks', trauvel.blocks);
+    const blockStates = trauvel.blocks.map(block => (
+        {
+            id: block.id,
+            left: parseFloat(block.style.left),
+            top: parseFloat(block.style.top),
+            text: block.querySelector('.block-name').innerText,
+            linkBlocks: block.linkBlocks ? Array.from(block.linkBlocks) : null,
+            childrenClasses: block.childrenClasses ? block.childrenClasses : null,
+        }
+    ));
+    // console.log('blockStates', blockStates);
+
+    const connectionStates = jsPlumbInstance.getConnections().map(connection => ({
+        source: connection.source.id,
+        target: connection.target.id
+    }));
+    // console.log('connectionStates', connectionStates);
+
+    if (isJson) {
+        return JSON.stringify({ blocks: blockStates, connections: connectionStates });
+    } else {
+        return { blocks: blockStates, connections: connectionStates };
+    }
+}
+
+function loadCanvas(jsonData = [], isParse = true) {
+    // console.log('jsonData', jsonData);
+    if (jsonData) {
+        if (isParse) {
+            // console.log('parse');
+            var { blocks: blockStates, connections: connectionStates } = JSON.parse(jsonData);
+        } else {
+            var { blocks: blockStates, connections: connectionStates } = jsonData;
+        }
+        // console.log('blockStates', blockStates);
+        if (!blockStates) return;
+
+        trauvel.editor.innerHTML = '';
+
+        // Восстанавливаем блоки
+        // console.log('blockStates', blockStates);
+        blockStates.forEach(state => {
+            // console.log('state', state);
+            createBlock(state.id, state.left, state.top, state.text, state.linkBlocks, state.childrenClasses);
+        });
+
+        // Восстанавливаем соединения
+        connectionStates.forEach(state => {
+            jsPlumbInstance.connect({
+                source: state.source,
+                target: state.target
+            });
+        });
+    }
 }

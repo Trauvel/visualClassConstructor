@@ -1,13 +1,16 @@
-function createService(id, left = 0, top = 0, text = 'Новый сервис', linkBlocks = [], childrenClasses = []) {
+function createBlock(id, left = 0, top = 0, text = 'Новый блок', linkBlocks = [], childrenClasses = []) {
     const block = document.createElement('div');
     block.classList.add('block');
     block.style.left = `${left}px`;
     block.style.top = `${top}px`;
     block.id = id;
     if (linkBlocks?.length)
-        block.linkBlocks = new Set(JSON.parse(linkBlocks));
-    if (childrenClasses?.length)
-        block.childrenClasses = JSON.parse(childrenClasses);
+        block.linkBlocks = new Set(linkBlocks);
+    if (childrenClasses){
+        block.childrenClasses = childrenClasses;
+        // console.log('childrenClassesCreate', 'true');
+    }
+    // console.log('childrenClasses', childrenClasses);
 
     //создаю div обертку
     let block2 = document.createElement('div');

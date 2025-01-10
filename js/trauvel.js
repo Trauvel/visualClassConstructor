@@ -6,7 +6,7 @@ dynamicallyLoadScript(
         './js/trauvel/variable.js',
 
 
-        './js/trauvel/components/elements/service.js',
+        './js/trauvel/components/elements/block.js',
         './js/trauvel/components/elements/classes.js',
 
         './js/trauvel/components/ui/context-menu/ui.js',

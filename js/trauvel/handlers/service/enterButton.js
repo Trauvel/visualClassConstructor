@@ -1,5 +1,6 @@
 function enterButton(e) {
-    document.getElementById('saveButton').click();
+    trauvel.innerService = true;
+    // document.getElementById('saveButton').click();
 
     let service = e.target;
     let parent = service.closest('.block');
@@ -10,7 +11,5 @@ function enterButton(e) {
     document.getElementById('serviceId').value = parent.id;
 
     clearCanvas();
-    drawClasses(service.childrenClasses);
-
-    trauvel.innerService = true;
+    loadCanvas(parent.childrenClasses, false);
 }
